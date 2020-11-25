@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "mailu-auth"
+version = "0.1.0"
+description = "Authentication Server Drop-In for mailu"
+authors = ["Lukas <lukas@infornautik.de>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0"
+pydantic = "^1"
+httpx = "^0"
+srslib = "^0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+uvicorn = "^0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
