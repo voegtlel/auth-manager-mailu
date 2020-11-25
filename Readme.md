@@ -76,10 +76,8 @@ services:
       - front
 
   admin:
-    image: voegtlel/auth-manager-backend
+    image: voegtlel/auth-manager-mailu
     restart: unless-stopped
-    volumes:
-      - ./key.private:/app/key.private
     environment:
       MAIL_DOMAINS=["localhost.localdomain"]
 
