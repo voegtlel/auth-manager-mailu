@@ -1,7 +1,7 @@
-<a href="https://cloud.docker.com/repository/docker/voegtlel/auth-manager-backend/builds">
-  <img src="https://img.shields.io/docker/cloud/build/voegtlel/auth-manager-backend.svg" alt="Docker build status" />
+<a href="https://cloud.docker.com/repository/docker/voegtlel/auth-manager-mailu/builds">
+  <img src="https://img.shields.io/docker/cloud/build/voegtlel/auth-manager-mailu.svg" alt="Docker build status" />
 </a>
-<img src="https://img.shields.io/github/license/voegtlel/auth-manager-backend.svg" alt="License" />
+<img src="https://img.shields.io/github/license/voegtlel/auth-manager-mailu.svg" alt="License" />
 
 # Alternative authentication backend for mailu for the auth-manager ecosystem
 
