@@ -11,20 +11,6 @@ This is an alternative backend for the [mailu](https://github.com/Mailu/Mailu) e
 
 Use an AGSI server and import `mailu_auth.app:app`.
 
-# Config
-
-## Required environment variables
-```
-BACKEND_CORS_ORIGIN=["http://127.0.0.1:4200"]
-MAILU_AUTH_API_AUTH_TOKEN=123456
-MAILU_AUTH_API_URL=http://localhost:5000
-ALLOW_NETS=0.0.0.0/0
-IMAP_ADDRESS=localhost
-POP3_ADDRESS=localhost
-AUTHSMTP_ADDRESS=localhost
-SMTP_ADDRESS=localhost
-```
-
 ## Docker compose
 
 ```
