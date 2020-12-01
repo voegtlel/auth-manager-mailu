@@ -14,8 +14,6 @@ class Settings(BaseSettings):
     # without authentication (i.e. this must be the smallest net nginx is located)
     allow_nets: str
 
-    backend_cors_origin: List[str]
-
     imap_address: str = "imap"
     pop3_address: str = "imap"
     authsmtp_address: str = "smtp"

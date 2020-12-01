@@ -99,7 +99,7 @@ async def sender_login(sender: str) -> str:
 
 
 @router.get(
-    '/postfix/sender/login/{sender:path}',
+    '/postfix/sender/access/{sender:path}',
     tags=['Postfix'],
     response_model=str
 )
