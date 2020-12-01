@@ -22,7 +22,7 @@ class PassdbDict(BaseModel):
 
 
 @router.get(
-    '/dovecot/passdb/{user_email:path}',
+    '/internal/dovecot/passdb/{user_email:path}',
     tags=['Dovecot'],
     response_model=PassdbDict
 )
@@ -41,7 +41,7 @@ class UserdbDict(BaseModel):
 
 
 @router.get(
-    '/dovecot/userdb/{user_email:path}',
+    '/internal/dovecot/userdb/{user_email:path}',
     tags=['Dovecot'],
     response_model=PassdbDict
 )
@@ -56,7 +56,7 @@ async def userdb_dict(user_email: str):
 
 
 @router.post(
-    '/dovecot/quota/{ns}/{user_email:path}',
+    '/internal/dovecot/quota/{ns}/{user_email:path}',
     tags=['Dovecot'],
 )
 async def save_dict(ns: str, user_email: str, request: Request):
@@ -68,7 +68,7 @@ async def save_dict(ns: str, user_email: str, request: Request):
 
 
 @router.get(
-    "/dovecot/sieve/name/{script}/{user_email:path}",
+    "/internal/dovecot/sieve/name/{script}/{user_email:path}",
     tags=['Dovecot'],
     response_model=str,
 )
@@ -77,7 +77,7 @@ async def save_dict(ns: str, user_email: str):
 
 
 @router.get(
-    "/dovecot/sieve/data/default/{user_email:path}",
+    "/internal/dovecot/sieve/data/default/{user_email:path}",
     tags=['Dovecot'],
 )
 async def sieve_data(user_email: str):
@@ -85,7 +85,7 @@ async def sieve_data(user_email: str):
 
 
 @router.get(
-    "/dovecot/sieve/name/{script}/{user_email:path}",
+    "/internal/dovecot/sieve/name/{script}/{user_email:path}",
     tags=['Dovecot'],
     response_model=str,
 )

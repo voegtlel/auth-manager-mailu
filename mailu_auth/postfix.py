@@ -10,7 +10,7 @@ router = APIRouter()
 
 
 @router.get(
-    '/postfix/domain/{domain_name:path}',
+    '/internal/postfix/domain/{domain_name:path}',
     tags=['Postfix'],
     response_model=str
 )
@@ -23,7 +23,7 @@ async def mailbox_domain(domain_name: str) -> str:
 
 
 @router.get(
-    '/postfix/mailbox/{email:path}',
+    '/internal/postfix/mailbox/{email:path}',
     tags=['Postfix'],
     response_model=str
 )
@@ -34,7 +34,7 @@ async def mailbox_map(email: str) -> str:
 
 
 @router.get(
-    '/postfix/alias/{alias:path}',
+    '/internal/postfix/alias/{alias:path}',
     tags=['Postfix'],
     response_model=str
 )
@@ -46,7 +46,7 @@ async def alias_map(alias: str) -> str:
 
 
 @router.get(
-    '/postfix/transport/{email:path}',
+    '/internal/postfix/transport/{email:path}',
     tags=['Postfix'],
     response_model=str
 )
@@ -59,7 +59,7 @@ async def transport(email: str) -> str:
 
 
 @router.get(
-    '/postfix/recipient/map/{recipient:path}',
+    '/internal/postfix/recipient/map/{recipient:path}',
     tags=['Postfix'],
     response_model=str
 )
@@ -74,7 +74,7 @@ async def recipient_map(recipient: str) -> str:
 
 
 @router.get(
-    '/postfix/sender/map/{sender:path}',
+    '/internal/postfix/sender/map/{sender:path}',
     tags=['Postfix'],
     response_model=str
 )
@@ -87,7 +87,7 @@ async def sender_map(sender: str) -> str:
 
 
 @router.get(
-    '/postfix/sender/login/{sender:path}',
+    '/internal/postfix/sender/login/{sender:path}',
     tags=['Postfix'],
     response_model=str
 )
@@ -99,7 +99,7 @@ async def sender_login(sender: str) -> str:
 
 
 @router.get(
-    '/postfix/sender/access/{sender:path}',
+    '/internal/postfix/sender/access/{sender:path}',
     tags=['Postfix'],
     response_model=str
 )

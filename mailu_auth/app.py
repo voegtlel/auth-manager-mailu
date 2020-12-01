@@ -6,7 +6,7 @@ from mailu_auth.dovecot import router as dovecot_router
 from mailu_auth.postfix import router as postfix_router
 from mailu_auth.nginx_auth import router as nginx_auth_router
 
-app = FastAPI(root_path='/internal')
+app = FastAPI()
 
 app.include_router(dovecot_router)
 app.include_router(postfix_router)
