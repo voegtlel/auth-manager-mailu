@@ -63,7 +63,7 @@ def _auth_success(auth_server: str, auth_port: str) -> Response:
 
 
 @router.get(
-    '/internal/nginx/auth',
+    '/internal/auth/email',
     tags=['NGinx Auth'],
     response_model=None,
 )
