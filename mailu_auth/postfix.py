@@ -93,7 +93,7 @@ async def sender_map(sender: str) -> str:
 )
 async def sender_login(sender: str) -> str:
     target_emails = await access_api.access_api.email_redirect(sender)
-    if target_emails is None:
+    if target_emails:
         raise HTTPException(404)
     return ",".join(target_emails)
 
