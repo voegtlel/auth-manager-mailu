@@ -93,6 +93,9 @@ async def sender_map(sender: str) -> str:
 )
 async def sender_login(sender: str) -> str:
     target_emails = await access_api.access_api.email_redirect(sender)
+    # Somehow this always needs the sender in the result
+    if target_emails is not None and sender not in target_emails:
+        target_emails.append(sender)
     if not target_emails:
         raise HTTPException(404)
     return ",".join(target_emails)
