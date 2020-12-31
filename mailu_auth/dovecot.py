@@ -31,7 +31,9 @@ async def passdb_dict(user_email: str):
     # It should be checked afterwards by nginx if the user is actually permitted.
     #if not await access_api.access_api.has_email(user_email):
     #    raise HTTPException(404)
-    return PassdbDict(password=None, nopassword='Y', allow_nets=config.allow_nets, user=user_email.lower())
+    return PassdbDict(
+        password=None, nopassword='Y', allow_nets=config.allow_nets, user=user_email.lower()
+    )
 
 
 class UserdbDict(BaseModel):
@@ -43,7 +45,7 @@ class UserdbDict(BaseModel):
 @router.get(
     '/internal/dovecot/userdb/{user_email:path}',
     tags=['Dovecot'],
-    response_model=PassdbDict
+    response_model=UserdbDict
 )
 async def userdb_dict(user_email: str):
     try:
@@ -64,15 +66,6 @@ async def save_dict(ns: str, user_email: str, request: Request):
         user_used_quota = request.json()
         print(f"Update user data usage for {user_email}: {user_used_quota}")
         # No saving needed...
-    return None
-
-
-@router.get(
-    "/internal/dovecot/sieve/name/{script}/{user_email:path}",
-    tags=['Dovecot'],
-    response_model=str,
-)
-async def save_dict(ns: str, user_email: str):
     return None
 
 
