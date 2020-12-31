@@ -74,7 +74,7 @@ async def nginx_auth(
         auth_pass: Optional[str] = Header(None),
         auth_login_attempt: int = Header(1),
         client_ip: str = Header(...),
-        client_host: str = Header(...),
+        client_host: Optional[str] = Header(None),
 ) -> Response:
     """
     Authentication for nginx `auth_http`. Use like::
