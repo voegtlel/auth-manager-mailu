@@ -1,7 +1,7 @@
 import os
 from typing import Optional, Literal
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Response
 from pydantic import BaseModel
 from starlette.requests import Request
 from starlette.responses import FileResponse
@@ -66,7 +66,7 @@ async def save_dict(ns: str, user_email: str, request: Request):
         user_used_quota = request.json()
         print(f"Update user data usage for {user_email}: {user_used_quota}")
         # No saving needed...
-    return None
+    return Response(status_code=200)
 
 
 @router.get(
