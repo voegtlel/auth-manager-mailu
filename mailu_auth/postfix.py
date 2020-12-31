@@ -40,7 +40,7 @@ async def mailbox_map(email: str) -> str:
 )
 async def alias_map(alias: str) -> str:
     target_emails = await access_api.access_api.email_redirect(alias)
-    if target_emails is None:
+    if not target_emails:
         raise HTTPException(404)
     return ",".join(target_emails)
 
