@@ -71,7 +71,7 @@ async def userdb_dict(user_email: str):
 )
 async def save_dict(ns: str, user_email: str, request: Request):
     if ns == 'storage':
-        user_used_quota = request.json()
+        user_used_quota = await request.json()
         print(f"Update user data usage for {user_email}: {user_used_quota}")
         # No saving needed...
     return Response(status_code=200)
