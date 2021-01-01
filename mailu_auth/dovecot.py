@@ -4,13 +4,21 @@ from typing import Optional, Literal
 from fastapi import APIRouter, HTTPException, Response
 from pydantic import BaseModel
 from starlette.requests import Request
-from starlette.responses import FileResponse
 
 from mailu_auth import access_api
 from mailu_auth.access_api import AuthenticationError
 from mailu_auth.config import config
 
 router = APIRouter()
+
+
+def _read_sieve():
+    sieve_path = os.path.join(os.path.dirname(__file__), 'templates', 'default.sieve')
+    with open(sieve_path, 'r') as f:
+        return f.read()
+
+
+sieve_contents = _read_sieve()
 
 
 class PassdbDict(BaseModel):
@@ -72,9 +80,11 @@ async def save_dict(ns: str, user_email: str, request: Request):
 @router.get(
     "/internal/dovecot/sieve/data/default/{user_email:path}",
     tags=['Dovecot'],
+    response_model=str,
 )
 async def sieve_data(user_email: str):
-    return FileResponse(os.path.join(os.path.dirname(__file__), 'templates', 'default.sieve'))
+    # sieve_contents = sieve_contents.replace(b'{{user_email}}', user_email.encode('utf-8'))
+    return sieve_contents
 
 
 @router.get(
