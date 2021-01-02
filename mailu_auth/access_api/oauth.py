@@ -51,6 +51,8 @@ class OAuthAccessApi(AccessApi):
 
     async def email_redirect(self, alias: str) -> List[str]:
         response = await httpx_client.get(f"{openid_mail_endpoint}/redirects/{alias}")
+        if response.status_code == 404:
+            raise AuthenticationError("User invalid", "0")
         response.raise_for_status()
         return response.json()
 
