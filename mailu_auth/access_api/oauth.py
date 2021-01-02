@@ -36,7 +36,9 @@ class OAuthAccessApi(AccessApi):
         response = await httpx_client.get(f"{openid_mail_endpoint}/quota/{email}")
         if response.status_code == 404:
             raise AuthenticationError("User invalid", "0")
-        response.raise_for_status()
+        elif response.status_code != 200:
+            print(response.content)
+            response.raise_for_status()
         result = response.json()
         if not isinstance(result, int):
             raise ValueError(f"Invalid response from server: {response.text}")
@@ -46,14 +48,18 @@ class OAuthAccessApi(AccessApi):
         response = await httpx_client.get(f"{openid_mail_endpoint}/postbox-exists/{email}")
         if response.status_code == 404:
             return False
-        response.raise_for_status()
+        elif response.status_code != 200:
+            print(response.content)
+            response.raise_for_status()
         return True
 
     async def email_redirect(self, alias: str) -> List[str]:
         response = await httpx_client.get(f"{openid_mail_endpoint}/redirects/{alias}")
         if response.status_code == 404:
             raise AuthenticationError("User invalid", "0")
-        response.raise_for_status()
+        elif response.status_code != 200:
+            print(response.content)
+            response.raise_for_status()
         return response.json()
 
     async def verify_postbox_access(self, email: str, password: str, client_ip: str):
@@ -61,7 +67,7 @@ class OAuthAccessApi(AccessApi):
         if '@' not in email:
             raise AuthenticationError("Missing '@' in address", "0")
         mail_name, domain = email.split('@', 1)
-        if domain not in config.mail_domains:
+        if not self.has_domain(domain):
             raise AuthenticationError("Invalid domain", "0")
 
         response = await httpx_client.post(
@@ -70,14 +76,16 @@ class OAuthAccessApi(AccessApi):
         )
         if response.status_code == 403:
             raise AuthenticationError('Invalid credentials', response.headers.get('X-Retry-Wait'))
-        response.raise_for_status()
+        elif response.status_code != 200:
+            print(response.content)
+            response.raise_for_status()
 
     async def verify_send_access(self, email: str, password: str, client_ip: str):
         email = email.lower()
         if '@' not in email:
             raise AuthenticationError("Missing '@' in address", "0")
         mail_name, domain = email.split('@', 1)
-        if domain not in config.mail_domains:
+        if not self.has_domain(domain):
             raise AuthenticationError("Invalid domain", "0")
 
         response = await httpx_client.post(
@@ -86,7 +94,9 @@ class OAuthAccessApi(AccessApi):
         )
         if response.status_code == 403:
             raise AuthenticationError('Invalid credentials', response.headers.get('X-Retry-Wait'))
-        response.raise_for_status()
+        elif response.status_code != 200:
+            print(response.content)
+            response.raise_for_status()
 
 
 def get_api():

@@ -40,6 +40,17 @@ async def mailbox_map(email: str) -> str:
     response_model=str
 )
 async def alias_map(alias: str) -> str:
+    """This translates the given e-mail address to aliases.
+    Translates domain and e-mail addresses to the actual target address and additional aliases.
+    Returns 404 if the address is external."""
+    if '@' in alias:
+        domain = alias.split('@', 1)[1]
+    else:
+        domain = alias
+    if not await access_api.access_api.has_domain(domain):
+        raise HTTPException(404)
+    if '@' not in alias:
+        return alias
     try:
         target_emails = await access_api.access_api.email_redirect(alias)
     except AuthenticationError:
@@ -87,7 +98,7 @@ async def sender_map(sender: str) -> str:
     domain = sender.split('@', 1)[-1]
     if not await access_api.access_api.has_domain(domain):
         raise HTTPException(404)
-    return srs.forward(sender, config.domain)
+    return srs.forward(sender, domain)
 
 
 @router.get(
